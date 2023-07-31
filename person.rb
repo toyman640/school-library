@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # A class representing a person with certain attributes and methods.
 class Person
   # Initializes a new Person object.

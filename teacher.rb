@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'person'
 
 # A class inheriting person object with addition of specialization instance
