@@ -56,7 +56,9 @@
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
-
+It has Person Class
+A Student Class which inherit properties from Person Class
+A Teacher Class which inherit properties from Person Class
 
 - **School Library**
 
