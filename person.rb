@@ -8,7 +8,7 @@ end
 
 # A class representing a person with certain attributes and methods.
 class Person < Nameable
-  attr_accessor :nameable, :name, :age
+  attr_accessor :nameable, :name, :age, :rental
 
   # Initializes a new Person object.
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -27,6 +27,10 @@ class Person < Nameable
 
   def correct_name
     @name
+  end
+
+  def add_rental(rental)
+    @rentals << rental
   end
 
   private

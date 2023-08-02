@@ -2,6 +2,7 @@ require 'person'
 
 # A class inheriting person object with addition of classroom instance
 class Student < Person
+  belongs_to :classroom
   # Inheriting person object.
   def initialize(age, classroom, name = 'Unknown', parent_permission: true)
     super(name, age, parent_permission: parent_permission)
