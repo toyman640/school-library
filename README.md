@@ -59,18 +59,13 @@
 It has Person Class
 A Student Class which inherit properties from Person Class
 A Teacher Class which inherit properties from Person Class
+- **[Encapsulation]**
+- **[Abstraction]**
+- **[Inheritance]**
+- **[Polymorphism]**
+
 
 - **School Library**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-Coming Soon...
-
-<!-- - [Live Demo Link](<replace-with-your-deployment-URL>) -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -82,16 +77,8 @@ Coming Soon...
 To get a local copy up and running, follow these steps.
 
 ### Prerequisites
-
-Coming Soon...
-
-<!--
-Example command:
-
-```sh
- gem install rails
-```
- -->
+- Ruby
+- GitHub
 
 ### Setup
 
@@ -105,52 +92,30 @@ Clone this repository to your desired folder:
 
 ### Install
 
-Coming Soon...
-
-<!--
-Example command:
+Install the required gems by running:
 
 ```sh
-  cd my-project
-  gem install
+  bundle install
 ```
---->
+
 
 ### Usage
 
 Coming Soon...
 
-<!--
-Example command:
+Use the following command to run the program:
 
 ```sh
-  rails server
+  ruby my-file.rb
 ```
---->
-
 ### Run tests
 
-Coming Soon...
-
-<!--
-Example command:
+Use the following command to run the tests:
 
 ```sh
-  bin/rails test test/models/article_test.rb
+  rubocop
 ```
---->
 
-### Deployment
-
-Coming Soon...
-
-<!--
-Example:
-
-```sh
-
-```
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
