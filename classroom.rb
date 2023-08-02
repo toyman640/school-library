@@ -6,6 +6,4 @@ class Classroom
   end
 
   attr_accessor :label
-
-
 end
