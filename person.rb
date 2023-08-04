@@ -1,5 +1,3 @@
-# require_relative 'nameable'
-
 class Nameable
   def correct_name
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
@@ -8,10 +6,10 @@ end
 
 # A class representing a person with certain attributes and methods.
 class Person < Nameable
-  attr_accessor :nameable, :name, :age, :rental
+  attr_accessor :nameable, :name, :age, :rental, :type
 
   # Initializes a new Person object.
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  def initialize(age, name: 'Unknown', parent_permission: true)
     super()
     @id = rand 1..1000
     @age = age
@@ -30,8 +28,8 @@ class Person < Nameable
     @name
   end
 
-  def add_rental(book, date)
-    Rental.new(date, book, self)
+  def add_rental(rental)
+    @rentals << rental
   end
 
   private

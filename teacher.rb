@@ -1,10 +1,10 @@
-require 'person'
+require_relative 'person'
 
 # A class inheriting person object with addition of specialization instance
 class Teacher < Person
   # Inheriting person object.
-  def initialize(age, name = 'Unknown', parent_permission: true)
-    super(name, age, parent_permission: parent_permission)
+  def initialize(specialization, age, name: 'Unknown', parent_permission: true)
+    super(age, name: name, parent_permission: parent_permission)
     @specialization = specialization
   end
 
