@@ -32,39 +32,24 @@ class App
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     choice = gets.chomp.to_i
-
     puts 'Age:'
     age = gets.chomp.to_i
-
     puts 'Name:'
     name = gets.chomp
-
     parent_permission = false
-
     if choice == 1
       loop do
         puts 'Has parent permission? [Y/N]:'
         parent_permission_input = gets.chomp.downcase
-        if parent_permission_input == 'y'
-          parent_permission = true
-          person.type = 'Student'
-          break
-        elsif parent_permission_input == 'n'
-          break
-        else
-          puts "Invalid input. Please enter 'Y' or 'N' only."
-        end
+        parent_permission = parent_permission_input == 'y'
+        break if %w[y n].include?(parent_permission_input)
       end
-
-      if parent_permission
-        puts 'Enter classroom label:'
-        classroom_label = gets.chomp
-        classroom = Classroom.new(classroom_label)
-      else
-        classroom = nil
-      end
-
+      classroom = if parent_permission
+                    (puts('Enter classroom label:')
+                     Classroom.new(gets.chomp))
+                  end
       person = Student.new(age, classroom, name: name, parent_permission: parent_permission)
+      person.type = 'Student'
     elsif choice == 2
       puts 'Enter Specialization:'
       specialization = gets.chomp
@@ -74,7 +59,6 @@ class App
       puts 'Invalid choice. Please enter 1 for student or 2 for teacher.'
       return
     end
-
     @people << person
     puts 'Person created successfully'
   end
