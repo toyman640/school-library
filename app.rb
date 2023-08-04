@@ -29,40 +29,6 @@ class App
     puts(@people.map { |person| "[#{person.type}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}" })
   end
 
-  # def create_person
-  #   puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
-  #   choice = gets.chomp.to_i
-  #   puts 'Age:'
-  #   age = gets.chomp.to_i
-  #   puts 'Name:'
-  #   name = gets.chomp
-  #   parent_permission = false
-  #   if choice == 1
-  #     loop do
-  #       puts 'Has parent permission? [Y/N]:'
-  #       parent_permission_input = gets.chomp.downcase
-  #       parent_permission = parent_permission_input == 'y'
-  #       break if %w[y n].include?(parent_permission_input)
-  #     end
-  #     classroom = if parent_permission
-  #                   (puts('Enter classroom label:')
-  #                    Classroom.new(gets.chomp))
-  #                 end
-  #     person = Student.new(age, classroom, name: name, parent_permission: parent_permission)
-  #     person.type = 'Student'
-  #   elsif choice == 2
-  #     puts 'Enter Specialization:'
-  #     specialization = gets.chomp
-  #     person = Teacher.new(age, specialization, name: name, parent_permission: true)
-  #     person.type = 'Teacher'
-  #   else
-  #     puts 'Invalid choice. Please enter 1 for student or 2 for teacher.'
-  #     return
-  #   end
-  #   @people << person
-  #   puts 'Person created successfully'
-  # end
-
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     choice = gets.chomp.to_i
@@ -72,9 +38,6 @@ class App
     name = gets.chomp
 
     if choice == 1
-      # parent_permission = parent_permission_get
-      # classroom = parent_permission ? classroom_get : nil
-      # person = create_student(age, name, parent_permission, classroom)
       person = create_student(age, name, parent_permission_get, parent_permission_get ? classroom_get : nil)
     elsif choice == 2
       person = create_teacher(age, name)
