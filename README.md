@@ -128,7 +128,7 @@ Use the following command to run the tests:
 
 - GitHub: [@toyman640](https://github.com/toyman640)
 - Twitter: [@_toyman](https://twitter.com/_toyman)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle) 
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/falako-omotoyosi/) 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -149,7 +149,7 @@ Use the following command to run the tests:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/toyman640/school-library.git).
+Feel free to check the [issues page](https://github.com/toyman640/school-library/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
