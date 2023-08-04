@@ -136,7 +136,10 @@ Use the following command to run the tests:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-N/A
+-Add Peron(Student or Teacher)
+-Add Book
+-Add Rental
+-retrieve all the stored data
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
