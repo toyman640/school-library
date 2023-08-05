@@ -19,8 +19,8 @@ class App
 
   def list_all_books
     puts 'List of all books:'
-    @books.each_with_index do |book, _index|
-      puts "#{_index}) Title: \"#{book.title}\", Author: #{book.author}"
+    @books.each_with_index do |book, index|
+      puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
     end
   end
 
@@ -38,12 +38,12 @@ class App
     age = gets.chomp.to_i
     print 'Name: '
     name = gets.chomp
-  
-    parent_permission = (choice == 1) ? parent_permission_get : true
-    classroom = (choice == 1 && parent_permission) ? classroom : nil
-  
-    person = (choice == 1) ? create_student(age, name, parent_permission, classroom) : create_teacher(age, name)
-  
+
+    parent_permission = choice == 1 ? parent_permission_get : true
+    classroom = nil unless choice == 1 && parent_permission
+
+    person = choice == 1 ? create_student(age, name, parent_permission, classroom) : create_teacher(age, name)
+
     if person
       @people << person
       puts 'Person created successfully'
@@ -51,8 +51,6 @@ class App
       puts 'Invalid choice. Please enter 1 for student or 2 for teacher.'
     end
   end
-  
-  
 
   def create_student(age, name, parent_permission, classroom)
     student = Student.new(age, classroom, name: name, parent_permission: parent_permission)
@@ -131,26 +129,26 @@ class App
     # List all available books
     print 'Available books:'
     list_all_books
-  
+
     print 'Select the index of the book from the available books:'
     book_index = gets.chomp.to_i
-  
+
     # List all persons
     puts 'List of all persons:'
     list_all_people
-  
-    print "Select a person by index from the following list:"
+
+    print 'Select a person by index from the following list:'
     person_index = gets.chomp.to_i
-  
+
     print 'Enter rental date (YYYY-MM-DD):'
     date = gets.chomp
-  
+
     # Find the person by their index
     person = @people[person_index]
-  
+
     if person && book_index.between?(0, @books.length - 1)
       book = @books[book_index]
-  
+
       rental = Rental.new(date, book, person)
       @rentals << rental
       puts " Book ID: #{rental.book.object_id}, Person ID: #{rental.person.object_id}, Rental Date: #{rental.date}."
@@ -158,7 +156,6 @@ class App
       puts 'Invalid person index or book selection. Please check the index and book index and try again.'
     end
   end
-  
 
   def list_rentals_for_person
     print 'Enter person ID to list rentals:'
