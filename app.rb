@@ -20,32 +20,30 @@ class App
   def list_all_books
     puts 'List of all books:'
     @books.each_with_index do |book, _index|
-      puts "Title: '#{book.title}', Author: #{book.author}"
+      puts "#{_index}) Title: \"#{book.title}\", Author: #{book.author}"
     end
   end
 
   def list_all_people
     puts 'List of all people:'
-    puts(@people.map { |person| "[#{person.type}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}" })
+    @people.each_with_index do |person, index|
+      puts "#{index}) [#{person.type}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
+    end
   end
 
   def create_person
-    puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     choice = gets.chomp.to_i
-    puts 'Age:'
+    print 'Age: '
     age = gets.chomp.to_i
-    puts 'Name:'
+    print 'Name: '
     name = gets.chomp
-
-    if choice == 1
-      person = create_student(age, name, parent_permission_get, parent_permission_get ? classroom_get : nil)
-    elsif choice == 2
-      person = create_teacher(age, name)
-    else
-      puts 'Invalid choice. Please enter 1 for student or 2 for teacher.'
-      return
-    end
-
+  
+    parent_permission = (choice == 1) ? parent_permission_get : true
+    classroom = (choice == 1 && parent_permission) ? classroom : nil
+  
+    person = (choice == 1) ? create_student(age, name, parent_permission, classroom) : create_teacher(age, name)
+  
     if person
       @people << person
       puts 'Person created successfully'
@@ -53,6 +51,8 @@ class App
       puts 'Invalid choice. Please enter 1 for student or 2 for teacher.'
     end
   end
+  
+  
 
   def create_student(age, name, parent_permission, classroom)
     student = Student.new(age, classroom, name: name, parent_permission: parent_permission)
@@ -61,7 +61,7 @@ class App
   end
 
   def create_teacher(age, name)
-    puts 'Enter Specialization:'
+    print 'Enter Specialization:'
     specialization = gets.chomp
     teacher = Teacher.new(specialization, age, name: name, parent_permission: true)
     teacher.type = 'Teacher'
@@ -70,7 +70,7 @@ class App
 
   def parent_permission_get
     loop do
-      puts 'Has parent permission? [Y/N]:'
+      print 'Has parent permission? [Y/N]:'
       parent_permission_input = gets.chomp.downcase
       return parent_permission_input == 'y' if %w[y n].include?(parent_permission_input)
 
@@ -78,16 +78,16 @@ class App
     end
   end
 
-  def classroom_get
-    puts 'Enter classroom label:'
-    Classroom.new(gets.chomp)
-  end
+  # def classroom_get
+  #   puts 'Enter classroom label:'
+  #   Classroom.new(gets.chomp)
+  # end
 
   def create_book
-    puts 'Title:'
+    print 'Title:'
     title = gets.chomp
 
-    puts 'Author:'
+    print 'Author:'
     author = gets.chomp
 
     book = Book.new(title, author)
@@ -95,40 +95,73 @@ class App
     puts 'Book created successfully.'
   end
 
+  # def create_rental
+  #   # List all available books
+  #   print 'Available books:'
+  #   list_all_books
+
+  #   print 'Select the index of the book from the available books:'
+  #   book_index = gets.chomp.to_i
+
+  #   # List all persons
+  #   puts 'List of all persons:'
+  #   list_all_people
+
+  #   print "Select a person from the following list:"
+  #   person_id = gets.chomp.to_i
+
+  #   print 'Enter rental date (YYYY-MM-DD):'
+  #   date = gets.chomp
+
+  #   # Find the person by their ID
+  #   person = @people.find { |p| p.id == person_id }
+
+  #   if person && book_index.between?(0, @books.length - 1)
+  #     book = @books[book_index]
+
+  #     rental = Rental.new(date, book, person)
+  #     @rentals << rental
+  #     puts " Book ID: #{rental.book.object_id}, Person ID: #{rental.person.object_id}, Rental Date: #{rental.date}."
+  #   else
+  #     puts 'Invalid person ID or book selection. Please check the ID and book index and try again.'
+  #   end
+  # end
+
   def create_rental
     # List all available books
-    puts 'Available books:'
+    print 'Available books:'
     list_all_books
-
-    puts 'Select the index of the book from the available books:'
+  
+    print 'Select the index of the book from the available books:'
     book_index = gets.chomp.to_i
-
+  
     # List all persons
     puts 'List of all persons:'
     list_all_people
-
-    puts "Enter the person's ID from the list of persons:"
-    person_id = gets.chomp.to_i
-
-    puts 'Enter rental date (YYYY-MM-DD):'
+  
+    print "Select a person by index from the following list:"
+    person_index = gets.chomp.to_i
+  
+    print 'Enter rental date (YYYY-MM-DD):'
     date = gets.chomp
-
-    # Find the person by their ID
-    person = @people.find { |p| p.id == person_id }
-
+  
+    # Find the person by their index
+    person = @people[person_index]
+  
     if person && book_index.between?(0, @books.length - 1)
       book = @books[book_index]
-
+  
       rental = Rental.new(date, book, person)
       @rentals << rental
       puts " Book ID: #{rental.book.object_id}, Person ID: #{rental.person.object_id}, Rental Date: #{rental.date}."
     else
-      puts 'Invalid person ID or book selection. Please check the ID and book index and try again.'
+      puts 'Invalid person index or book selection. Please check the index and book index and try again.'
     end
   end
+  
 
   def list_rentals_for_person
-    puts 'Enter person ID to list rentals:'
+    print 'Enter person ID to list rentals:'
     person_id = gets.chomp.to_i
 
     person_rentals = @rentals.select { |rental| rental.person.id == person_id }
